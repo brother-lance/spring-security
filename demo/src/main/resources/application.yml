@@ -1,0 +1,52 @@
+# 配置启动服务端口的密码
+server:
+  port: 8060
+
+## 配置数据库
+spring:
+  # 配置数据库
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    url: jdbc:mysql://10.0.20.108:3306/k8s-cloud?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: baofoo
+    password: mandao@64//
+    initialSize: 2
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000 # 最大等待时间
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL  # 测试SQL
+    testWhileIdle: false # 空闲测试
+    testOnBorrow: false # 测试显示在浏览器
+    testOnReturn: false # 测试数据返回
+    filters: stat,wall,log4j # 过滤信息
+    logSlowSql: true  #是否显示SQL
+
+  ## spring session配置
+  session:
+    store-type: none
+
+## 安全认证 -  如果配置了需要使用spring的安全认证
+#security:
+#  basic:
+#    enabled: false
+
+## 针对服务可以配置类
+#k8sCloud:
+#  security:
+#    code:
+#      image:
+#        width: 120 #验证码的图片长度
+#        height: 25 #验证码的高度
+#        length: 1 #验证码的长度
+#        expireIn: 120  #验证码的有效时间（秒）
+#        url: "/api/1.0/user,/api/1.0/user/*"
+#    browser:
+#      loginPage: "/demo-signIn.html"  # 用户自定义返回的登录页面
+#      loginType: JSON    # 登录返回是什么方式，JSON 是：数据格式返回， REDIRECT ：重定向到下一个页面。
+
+

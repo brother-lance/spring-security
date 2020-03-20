@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>默认登录页</title>
+</head>
+<body>
+
+<h1>登录页面</h1>
+<form action="/authentication/form" method="post">
+    <table>
+        <tbody>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="username"/></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="password"/></td>
+        <tr>
+            <td>验证码：</td>
+            <td>
+                <input type="text" name="imageCode"/>
+                <img src="/api/1.0/imageCode">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="checkbox" name="remember-me" value="true"/>
+                <label >记住我</label>
+            </td>
+        </tr>
+        <tr>
+            <td  colspan="2">
+                <button type="submit">提交</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

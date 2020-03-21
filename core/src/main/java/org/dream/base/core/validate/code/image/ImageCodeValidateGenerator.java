@@ -1,8 +1,9 @@
-package org.dream.base.core.validate.code;
+package org.dream.base.core.validate.code.image;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.dream.base.core.properties.SecurityProperties;
+import org.dream.base.core.validate.code.ValidateCodeGenerator;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 

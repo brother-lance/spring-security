@@ -14,7 +14,14 @@ import lombok.Setter;
 @Setter
 public class ImageCodeProperties extends SmsCodeProperties {
 
+    public ImageCodeProperties() {
+        setLength(4);
+        setCodeInputName(SecurityConstants.DEFAULT_CODE_INPUT_NAME_IMAGE_KEY);
+    }
+
     private int width = 100;  // 图型验证的长度
     private int height = 23; // 图型验证的高度
+    private String format = "JPEG"; // 生成图片格式
+
 
 }

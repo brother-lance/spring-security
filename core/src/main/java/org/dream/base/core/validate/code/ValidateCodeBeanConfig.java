@@ -1,8 +1,10 @@
-package org.dream.base.core.config;
+package org.dream.base.core.validate.code;
 
 import org.dream.base.core.properties.SecurityProperties;
-import org.dream.base.core.validate.code.ImageCodeValidateGenerator;
-import org.dream.base.core.validate.code.ValidateCodeGenerator;
+import org.dream.base.core.validate.code.image.ImageCodeValidateGenerator;
+import org.dream.base.core.validate.code.sms.DefaultSmsCodeSender;
+import org.dream.base.core.authentication.mobile.SmsCodeSender;
+import org.dream.base.core.validate.code.sms.SmsValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +23,8 @@ public class ValidateCodeBeanConfig {
     @Autowired
     private SecurityProperties securityProperties;
 
+
+
     @Bean
     @ConditionalOnMissingBean(name = "imageCodeGenerator")
     public ValidateCodeGenerator imageCodeGenerator() {
@@ -28,4 +32,27 @@ public class ValidateCodeBeanConfig {
         generator.setSecurityProperties(securityProperties);
         return generator;
     }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "smsCodeGenerator")
+    public ValidateCodeGenerator smsCodeGenerator() {
+        SmsValidateCodeGenerator generator = new SmsValidateCodeGenerator();
+        generator.setSecurityProperties(securityProperties);
+        return generator;
+    }
+
+    /**
+     * 默认的短信发送类
+     */
+    @Bean
+    @ConditionalOnMissingBean(SmsCodeSender.class)
+    public SmsCodeSender smsCodeSender() {
+        DefaultSmsCodeSender smsCodeSender = new DefaultSmsCodeSender();
+        return smsCodeSender;
+    }
+
+
+
+
+
 }

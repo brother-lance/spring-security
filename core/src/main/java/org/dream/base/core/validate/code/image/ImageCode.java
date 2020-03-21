@@ -1,12 +1,11 @@
-package org.dream.base.core.validate.code;
+package org.dream.base.core.validate.code.image;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.dream.base.core.validate.code.ValidateCode;
 
 import java.awt.image.BufferedImage;
-import java.time.LocalDateTime;
 
 /**
  * 项目名称：security

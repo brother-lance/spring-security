@@ -1,4 +1,4 @@
-package org.dream.base.core.validate.code;
+package org.dream.base.core.validate.code.exception;
 
 import org.springframework.security.core.AuthenticationException;
 
@@ -12,6 +12,10 @@ import org.springframework.security.core.AuthenticationException;
 
 public class ValidateCodeException extends AuthenticationException {
 
+    /**
+     * 验证码异常
+     * @param msg
+     */
     public ValidateCodeException(String msg) {
         super(msg);
     }

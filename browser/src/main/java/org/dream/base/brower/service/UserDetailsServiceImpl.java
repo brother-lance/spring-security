@@ -29,7 +29,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Resource
     PasswordEncoder passwordEncoder;
 
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         log.info("登录用户名:{}", userName);
@@ -45,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         /** 实际业务逻辑，应该是直接从数据库中读取数据 */
         String encode = passwordEncoder.encode("123456");
 
-        return new User("admin", encode,
+        return new User(userName, encode,
                 true, true, true, true,
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }

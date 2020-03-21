@@ -14,8 +14,10 @@ import lombok.Setter;
 @Setter
 public class SmsCodeProperties {
 
-    private int length = 4;// 验证码位长度
+    private int length = 6;// 验证码位长度
     private int expireIn = 60;// 有效时间
     private String url = ""; // 要拦截的URL
+    private String mobileInputName = SecurityConstants.DEFAULT_MOBILE_INPUT_NAME_KEY; // 手机号输入值的字段名称
+    private String codeInputName = SecurityConstants.DEFAULT_CODE_INPUT_NAME_SMS_KEY; // 验证码字段名称
 
 }

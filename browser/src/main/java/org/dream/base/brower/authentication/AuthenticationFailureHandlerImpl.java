@@ -2,15 +2,12 @@ package org.dream.base.brower.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.startup.SetContextPropertiesRule;
 import org.dream.base.brower.support.SimpleResponse;
-import org.dream.base.core.properties.BrowserProperties;
 import org.dream.base.core.properties.LoginType;
 import org.dream.base.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 

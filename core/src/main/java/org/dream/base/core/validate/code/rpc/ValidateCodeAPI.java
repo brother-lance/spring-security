@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/1.0/code")
+@RequestMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX)
 public class ValidateCodeAPI {
 
     @Autowired
@@ -33,6 +33,5 @@ public class ValidateCodeAPI {
     public void get(HttpServletRequest request, HttpServletResponse response, @PathVariable(required = true, value = "type") String type) throws Exception {
         validateCodeProcessors.get(type + SecurityConstants.VALIDATE_CODE_PROCESSOR_SUFFIX).create(new ServletWebRequest(request, response));
     }
-
 
 }

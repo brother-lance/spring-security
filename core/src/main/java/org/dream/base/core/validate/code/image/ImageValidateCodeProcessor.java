@@ -3,7 +3,7 @@ package org.dream.base.core.validate.code.image;
 import lombok.Getter;
 import lombok.Setter;
 import org.dream.base.core.properties.SecurityProperties;
-import org.dream.base.core.impl.AbstractValidateCodeProcessor;
+import org.dream.base.core.validate.code.impl.AbstractValidateCodeProcessor;
 import org.dream.base.core.validate.code.ValidateCode;
 import org.dream.base.core.validate.code.ValidateCodeType;
 import org.springframework.beans.factory.annotation.Autowired;

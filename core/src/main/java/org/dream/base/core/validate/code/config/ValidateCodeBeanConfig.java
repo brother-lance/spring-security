@@ -1,6 +1,7 @@
-package org.dream.base.core.validate.code;
+package org.dream.base.core.validate.code.config;
 
 import org.dream.base.core.properties.SecurityProperties;
+import org.dream.base.core.validate.code.ValidateCodeGenerator;
 import org.dream.base.core.validate.code.image.ImageCodeValidateGenerator;
 import org.dream.base.core.validate.code.sms.DefaultSmsCodeSender;
 import org.dream.base.core.authentication.mobile.SmsCodeSender;

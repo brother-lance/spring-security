@@ -2,7 +2,7 @@ package org.dream.base.brower.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.dream.base.core.properties.LoginType;
+import org.dream.base.core.validate.code.LoginType;
 import org.dream.base.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

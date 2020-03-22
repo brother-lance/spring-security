@@ -3,7 +3,7 @@ package org.dream.base.brower.config;
 import org.dream.base.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import org.dream.base.core.properties.SecurityConstants;
 import org.dream.base.core.properties.SecurityProperties;
-import org.dream.base.core.config.AbstractChannelSecurityConfig;
+import org.dream.base.core.validate.code.config.AbstractChannelSecurityConfig;
 import org.dream.base.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

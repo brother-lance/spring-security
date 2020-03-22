@@ -1,4 +1,4 @@
-package org.dream.base.core.config;
+package org.dream.base.core.validate.code.config;
 
 import org.dream.base.core.properties.SecurityConstants;
 import org.dream.base.core.properties.SecurityProperties;
@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 /**
  * 项目名称：security
  * 类 名 称：AbstractChannelSecurityConfig
- * 类 描 述：
+ * 类 描 述：登录验证配置
  * 创建时间：2020/3/21 01:10
  * 创 建 人：Lance.WU
  */
@@ -28,7 +28,6 @@ public abstract class AbstractChannelSecurityConfig extends WebSecurityConfigure
 
     /**
      * 登录验证配置
-     *
      * @param http 前端需要验证的逻辑
      * @throws Exception
      */

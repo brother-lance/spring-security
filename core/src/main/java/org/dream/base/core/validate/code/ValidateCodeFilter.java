@@ -173,7 +173,6 @@ import java.util.Optional;
 @Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
-
     /**
      * 校验码流程持有者
      */
@@ -192,6 +191,11 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     AuthenticationFailureHandler authenticationFailureHandler;
 
     /**
+     * 配置路径安工类
+     */
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+
+    /**
      * 存放所需要验证码的处理器
      */
     private Map<String, ValidateCodeType> urlMap = new HashMap<>();
@@ -200,12 +204,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
 
-        urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
-        addToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
+        addUrl(ValidateCodeType.IMAGE, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, securityProperties.getCode().getImage().getUrl());
 
+        addUrl(ValidateCodeType.IMAGE, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, securityProperties.getCode().getSms().getUrl());
+    }
+
+    // 解析需要拦截的URL
+    private void addUrl(ValidateCodeType validateCodeType, String loginUrl, String filterUrl) {
         urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
         addToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
-
     }
 
     // 将URL转换单个URL 添加需要验证的MAP中
@@ -216,8 +223,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         });
     }
 
-    // 配置路径安工类
-    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {

@@ -1,4 +1,4 @@
-package org.dream.base.core.properties;
+package org.dream.base.core.validate.code;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

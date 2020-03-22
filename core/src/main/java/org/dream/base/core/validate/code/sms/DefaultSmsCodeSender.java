@@ -20,5 +20,7 @@ public class DefaultSmsCodeSender implements SmsCodeSender {
     @Override
     public void send(String mobileNo, String validateCode) {
         log.info("发送短信实现，手机号：{}， 验证码： {}", mobileNo, validateCode);
+
+        // TODO 此处需要用户自己实例短信发送的内容。
     }
 }

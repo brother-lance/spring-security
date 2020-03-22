@@ -2,6 +2,7 @@ package org.dream.base.core.properties;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.dream.base.core.validate.code.LoginType;
 
 /**
  * 项目名称：security

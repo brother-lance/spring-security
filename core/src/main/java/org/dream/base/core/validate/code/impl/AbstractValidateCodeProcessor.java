@@ -1,11 +1,10 @@
-package org.dream.base.core.impl;
+package org.dream.base.core.validate.code.impl;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.dream.base.core.properties.SecurityConstants;
-import org.dream.base.core.properties.SecurityProperties;
 import org.dream.base.core.validate.code.ValidateCode;
 import org.dream.base.core.validate.code.ValidateCodeGenerator;
 import org.dream.base.core.validate.code.ValidateCodeProcessor;

@@ -1,4 +1,4 @@
-package org.dream.base.core.config;
+package org.dream.base.core;
 
 import org.dream.base.core.properties.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

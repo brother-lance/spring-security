@@ -31,8 +31,8 @@ public class WeiXinAdapter implements ApiAdapter<WeiXin> {
 	}
 
 	/**
-	 * @param api
-	 * @return
+	 * @param api 测试是否能连接上微信
+	 * @return 结果
 	 */
 	@Override
 	public boolean test(WeiXin api) {
@@ -40,8 +40,8 @@ public class WeiXinAdapter implements ApiAdapter<WeiXin> {
 	}
 
 	/**
-	 * @param api
-	 * @param values
+	 * @param api 获取微信用户信息
+	 * @param values 微信查询返恩啊用户信息
 	 */
 	@Override
 	public void setConnectionValues(WeiXin api, ConnectionValues values) {
@@ -52,6 +52,7 @@ public class WeiXinAdapter implements ApiAdapter<WeiXin> {
 	}
 
 	/**
+	 * 是否设置用户同步发布信息
 	 * @param api
 	 * @return
 	 */
@@ -61,6 +62,7 @@ public class WeiXinAdapter implements ApiAdapter<WeiXin> {
 	}
 
 	/**
+	 * 发布微信信息
 	 * @param api
 	 * @param message
 	 */

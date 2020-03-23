@@ -19,6 +19,7 @@ import org.springframework.social.oauth2.OAuth2ServiceProvider;
 public class WeiXinConnectionFactory extends OAuth2ConnectionFactory<WeiXin> {
 
     /**
+     * 创建微信连接
      * @param appId
      * @param appSecret
      */

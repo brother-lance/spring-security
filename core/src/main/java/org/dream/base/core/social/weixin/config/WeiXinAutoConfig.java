@@ -23,9 +23,11 @@ public class WeiXinAutoConfig extends SocialAutoConfigurerAdapter {
     @Autowired
     SecurityProperties securityProperties;
 
+    /**
+     * 配置微信连接工厂
+     */
     @Override
     protected ConnectionFactory<?> createConnectionFactory() {
-
         WeiXinProperties weixin = securityProperties.getSocial().getWeixin();
         return new WeiXinConnectionFactory(weixin.getProviderId(), weixin.getAppId(), weixin.getAppSecret());
     }

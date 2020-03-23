@@ -7,7 +7,7 @@ import org.springframework.social.oauth2.AccessGrant;
 /**
  * 项目名称：security
  * 类 名 称：WeiXinAccessGrant
- * 类 描 述：
+ * 类 描 述：微信创建后操作
  * 创建时间：2020/3/23 00:47
  * 创 建 人：Lance.WU
  */
@@ -16,6 +16,7 @@ import org.springframework.social.oauth2.AccessGrant;
 public class WeiXinAccessGrant extends AccessGrant {
 
     private String openId;
+
 
     public WeiXinAccessGrant() {
         super("");

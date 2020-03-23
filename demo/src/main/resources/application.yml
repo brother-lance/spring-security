@@ -1,6 +1,7 @@
 # 配置启动服务端口的密码
 server:
-  port: 8060
+  port: 80
+#  port: 8060
 
 ## 配置数据库
 spring:
@@ -37,8 +38,18 @@ spring:
 
 ## 针对服务可以配置类
 security:
-  browser:
-    loginPage: "/demo-signIn.html"
+  social:
+    #    filterProcessorUrl: /api/1.0/auth/
+    qq:
+      appId: 1110359434
+      appSecret: Kh8Nor72TDRECU4r
+#      appId: 801069937
+#      appSecret: 65409b0c8130714b5135542bd0e263dd
+#    weixin:
+#      appId: wxd99431bbff8305a0
+#      appSecret: 60f78681d063590a469f1b297feff3c4
+#  browser:
+#    loginPage: "/demo-signIn.html"
 #  code:
 #    image:
 #      width: 120 #验证码的图片长度

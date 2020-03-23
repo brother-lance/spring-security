@@ -24,8 +24,6 @@ public class ValidateCodeBeanConfig {
     @Autowired
     private SecurityProperties securityProperties;
 
-
-
     @Bean
     @ConditionalOnMissingBean(name = "imageCodeGenerator")
     public ValidateCodeGenerator imageCodeGenerator() {
@@ -51,9 +49,5 @@ public class ValidateCodeBeanConfig {
         DefaultSmsCodeSender smsCodeSender = new DefaultSmsCodeSender();
         return smsCodeSender;
     }
-
-
-
-
 
 }

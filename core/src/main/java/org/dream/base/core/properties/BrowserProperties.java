@@ -15,7 +15,9 @@ import org.dream.base.core.validate.code.LoginType;
 @Setter
 public class BrowserProperties {
 
-    private String loginPage = SecurityConstants.DEFAULT_LOGIN_LOGIN_URL;
+    private String signUpUrl = SecurityConstants.DEFAULT_LOGIN_UP_URL;
+
+    private String loginPage = SecurityConstants.DEFAULT_LOGIN_IN_URL;
 
     private LoginType loginType = LoginType.JSON;
 

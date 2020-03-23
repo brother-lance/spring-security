@@ -3,6 +3,7 @@ package org.dream.base.brower.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.dream.base.brower.support.SimpleResponse;
+import org.dream.base.brower.support.SocialUserInfo;
 import org.dream.base.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,13 +11,19 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Provider;
 
 /**
  * 项目名称：security
@@ -32,14 +39,17 @@ public class BrowserSecurityAPI {
     /**
      * 请求缓存信息
      */
-    HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+    private HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
     /**
      * 跳转策略
      */
-    RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Autowired
-    SecurityProperties securityProperties;
+    private SecurityProperties securityProperties;
+
+    @Autowired
+    private ProviderSignInUtils providerSignInUtils;
 
     /**
      * 当需要身份证时，跳转到这里
@@ -64,5 +74,20 @@ public class BrowserSecurityAPI {
         }
 
         return new SimpleResponse("访问的服务需要身份认证，请引导用户跳转登录页面");
+    }
+
+    /**
+     * 获取社交登录的用户信息
+     * @param request 请求对象
+     */
+    @GetMapping("/authentication/require")
+    public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
+        SocialUserInfo userInfo = new SocialUserInfo();
+        Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
+        userInfo.setHeadImage(connection.getImageUrl());
+        userInfo.setNickName(connection.getDisplayName());
+        userInfo.setProviderId(connection.getKey().getProviderId());
+        userInfo.setProviderUserId(connection.getKey().getProviderUserId());
+        return userInfo;
     }
 }

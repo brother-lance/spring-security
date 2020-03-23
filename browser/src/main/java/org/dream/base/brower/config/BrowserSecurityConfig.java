@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -50,6 +51,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired
+    SpringSocialConfigurer springSocialConfigurer;
+
+    @Autowired
     private DataSource dataSource;
 
     /**
@@ -82,6 +86,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfig) // 添加短信配置
                 .and()
+                .apply(springSocialConfigurer)  // 社交登录的配置
+                .and()
                 .rememberMe()
                 .tokenRepository(persistentTokenRepository()) // 配置token存储数据源
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds()) // 登录保存时间配置
@@ -92,7 +98,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                         SecurityConstants.DEFAULT_UN_AUTHENTICATION_URL,  // 不需要授权页面(判断登录页)
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, // 手机号登录页面
                         securityProperties.getBrowser().getLoginPage(), //登录页配置
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*" // 验证流程的页面.
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*" ,// 验证流程的页面.
+                        securityProperties.getBrowser().getSignUpUrl() , // 注册地址
+                        "/api/1.0/user/register" // TODO  如果需要跳转页面，可以偷偷注册
                 ).permitAll()
                 .anyRequest()
                 .authenticated()

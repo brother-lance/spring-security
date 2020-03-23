@@ -1,4 +1,4 @@
-package org.dream.base.brower.service;
+package org.dream.base.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SocialUser;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,7 +24,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Slf4j
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDetailsService {
 
     /**
      * 密码加密对象
@@ -34,19 +37,30 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         log.info("登录用户名:{}", userName);
         // 用户名、密码、权限列表  可以通过数据库录入
 
-        // TODO 此处需要用户自己实现 查询用户信息的内容
 
+        return buildUser(userName);
+
+    }
+
+    @Override
+    public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
+        log.info("社交登录用户:{}", userId);
+        return buildUser(userId);
+
+    }
+
+    private SocialUserDetails buildUser(String userId) {
+
+        // TODO 此处需要用户自己实现 查询用户信息的内容
+        String encode = passwordEncoder.encode("123456");
         /**
          *  enabled: 一般是指用户的是否删除。
          *  accountNonExpired: 账号是否过期。
          *  credentialsNonExpired: 密码是否过期
          *  accountNonLocked: 是否锁定
          * */
-
         /** 实际业务逻辑，应该是直接从数据库中读取数据 */
-        String encode = passwordEncoder.encode("123456");
-
-        return new User(userName, encode,
+        return new SocialUser(userId, encode,
                 true, true, true, true,
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>默认登录页</title>
+</head>
+<body>
+
+<h1>注册页面</h1>
+<form action="/api/1.0/user/register" method="post">
+    <table>
+        <tbody>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="username" value="admin"/></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" value="123456" name="password"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" value="register">注册</button>
+                <button type="submit" value="binding">绑定</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>

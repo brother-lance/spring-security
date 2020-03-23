@@ -30,7 +30,11 @@ public final class SecurityConstants {
     /**
      * 默认的登录页面
      */
-    public static final String DEFAULT_LOGIN_LOGIN_URL = "/default-signIn.html";
+    public static final String DEFAULT_LOGIN_IN_URL = "/default-signIn.html";
+    /**
+     * 默认的注册页面
+     */
+    public static final String DEFAULT_LOGIN_UP_URL = "/default-signUp.html";
     /**
      * 存储验证码存储Session的前缀
      */
@@ -55,6 +59,8 @@ public final class SecurityConstants {
      * 默认图型校验码发送服务端验证字段的默认名称
      */
     public static final String DEFAULT_CODE_INPUT_NAME_IMAGE_KEY = "imageCode";
+
+
 
 
 }

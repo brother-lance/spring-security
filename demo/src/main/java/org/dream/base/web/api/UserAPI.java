@@ -1,18 +1,23 @@
 package org.dream.base.web.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.dream.base.dto.User;
 import org.dream.base.dto.UserQueryCondition;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.ServletWebRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,29 @@ import java.util.List;
 @RequestMapping("/api/1.0/user")
 @Slf4j
 public class UserAPI {
+
+    @Autowired
+    private ProviderSignInUtils providerSignInUtils;
+
+    /**
+     * 创建用户信息
+     * @param  user 用户对像
+     */
+    @PostMapping("register")
+    public void register(User user, HttpServletRequest request) {
+            // TODO 写注册用户逻辑 获取用户的基本信息
+        String userId = user.getUserName(); // 此处应该是获取唯一编号
+        providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
+
+    }
+
+    /**
+     * 测试接口
+     */
+    @GetMapping("me")
+    public Object me(@AuthenticationPrincipal UserDetails user) {
+        return user;
+    }
 
     /**
      * 创建用户信息
@@ -178,7 +206,7 @@ public class UserAPI {
      */
     @GetMapping("{id:\\d+}")
     @JsonView(User.UserSimpleDetailView.class)
-    public  User getInfo(@ApiParam(value = "用户编号") @PathVariable(required = false, value = "id") String id) {
+    public User getInfo(@ApiParam(value = "用户编号") @PathVariable(required = false, value = "id") String id) {
         //   throw new RuntimeException("not found user");
         //  throw new UserNotExistsException(id);
         User user = new User();

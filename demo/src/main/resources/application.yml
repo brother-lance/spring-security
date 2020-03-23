@@ -45,9 +45,9 @@ security:
       appSecret: Kh8Nor72TDRECU4r
 #      appId: 801069937
 #      appSecret: 65409b0c8130714b5135542bd0e263dd
-#    weixin:
-#      appId: wxd99431bbff8305a0
-#      appSecret: 60f78681d063590a469f1b297feff3c4
+    weixin:
+      appId: wxd99431bbff8305a0
+      appSecret: 60f78681d063590a469f1b297feff3c4
 #  browser:
 #    loginPage: "/demo-signIn.html"
 #  code:

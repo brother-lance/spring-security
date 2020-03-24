@@ -22,4 +22,6 @@ public class BrowserProperties {
     private LoginType loginType = LoginType.JSON;
 
     private int rememberMeSeconds = 60 * 60 * 24 * 7 * 2; //两周登陆保存时间
+
+    SessionProperties session = new SessionProperties();
 }

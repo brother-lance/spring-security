@@ -18,8 +18,8 @@ public class SocialUserInfo {
 
     private String providerUserId;
 
-    private String nickName;
+    private String nickname;
 
-    private String headImage;
+    private String headimg;
 
 }

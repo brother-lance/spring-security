@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * 创建时间：2020/3/23 00:07
  * 创 建 人：Lance.WU
  */
-@Component
+//@Component
 public class DefaultConnectionSignUp implements ConnectionSignUp {
 
     @Override

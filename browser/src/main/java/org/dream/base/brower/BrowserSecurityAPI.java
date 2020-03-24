@@ -1,4 +1,4 @@
-package org.dream.base.brower.controller;
+package org.dream.base.brower;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -78,16 +78,29 @@ public class BrowserSecurityAPI {
 
     /**
      * 获取社交登录的用户信息
+     *
      * @param request 请求对象
      */
     @GetMapping("/authentication/require")
     public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
         SocialUserInfo userInfo = new SocialUserInfo();
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
-        userInfo.setHeadImage(connection.getImageUrl());
-        userInfo.setNickName(connection.getDisplayName());
+        userInfo.setHeadimg(connection.getImageUrl());
+        userInfo.setNickname(connection.getDisplayName());
         userInfo.setProviderId(connection.getKey().getProviderId());
         userInfo.setProviderUserId(connection.getKey().getProviderUserId());
         return userInfo;
+    }
+
+    /**
+     * 获取社交登录的用户信息
+     *
+     * @param request 请求对象
+     */
+    @GetMapping("/session/invalid")
+    public SimpleResponse getSocialUserInfo(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("application/json; charset=UTF-8");
+        String message = "Session失效";
+        return new SimpleResponse(message);
     }
 }

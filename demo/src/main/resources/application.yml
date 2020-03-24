@@ -1,6 +1,10 @@
 # 配置启动服务端口的密码
 server:
   port: 80
+  session:
+    # 十分钟
+    timeout: 600
+
 #  port: 8060
 
 ## 配置数据库

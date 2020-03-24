@@ -60,7 +60,10 @@ public final class SecurityConstants {
      */
     public static final String DEFAULT_CODE_INPUT_NAME_IMAGE_KEY = "imageCode";
 
-
+    /**
+     * Session失败跳转页面
+     */
+    public static final String DEFAULT_SESSION_INVALID_URL = "/default-session-invalid.html";
 
 
 }

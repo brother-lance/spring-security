@@ -64,7 +64,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 
         String type = getProcessorType(request);
         ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(type + SecurityConstants.VALIDATE_CODE_GENERATOR_SUFFIX);
-        return (C) validateCodeGenerator.generator(request);
+        return (C) validateCodeGenerator.generate(request);
     }
 
     /**

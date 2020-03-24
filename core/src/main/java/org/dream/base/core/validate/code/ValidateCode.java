@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ValidateCode {
+public class ValidateCode implements java.io.Serializable {
 
     /** 验证码 */
     private String code;

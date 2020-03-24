@@ -13,10 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 创建时间：2020/3/17 22:44
  * 创 建 人：Lance.WU
  */
-@SpringBootApplication(exclude = {
-        RedisAutoConfiguration.class,  /** TODO 暂时不加载Redis  */
-        RedisRepositoriesAutoConfiguration.class
-})
+@SpringBootApplication
 @EnableSwagger2
 public class DemoApplication {
 

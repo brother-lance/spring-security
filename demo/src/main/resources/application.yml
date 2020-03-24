@@ -11,9 +11,9 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     driver-class-name: com.mysql.jdbc.Driver
     platform: mysql
-    url: jdbc:mysql://10.0.20.108:3306/k8s-cloud?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
-    username: baofoo
-    password: mandao@64//
+    url: jdbc:mysql://127.0.0.1:3306/k8s-cloud?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: root
+    password: 123456
     initialSize: 2
     minIdle: 5
     maxActive: 20
@@ -29,7 +29,10 @@ spring:
 
   ## spring session配置
   session:
-    store-type: none
+    store-type: REDIS
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 ## 安全认证 -  如果配置了需要使用spring的安全认证
 #security:

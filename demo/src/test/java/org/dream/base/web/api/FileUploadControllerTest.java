@@ -30,7 +30,6 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 public class FileUploadControllerTest extends  SpringBaseTest {
 
-
     /**
      * 上传文件
      */

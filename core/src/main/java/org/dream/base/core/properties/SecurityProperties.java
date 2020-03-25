@@ -11,9 +11,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 创建时间：2020/3/19 12:12
  * 创 建 人：Lance.WU
  */
-@ConfigurationProperties(prefix = "security")
 @Getter
 @Setter
+@ConfigurationProperties(prefix = "security")
 public class SecurityProperties {
 
     BrowserProperties browser = new BrowserProperties();

@@ -1,4 +1,4 @@
-package org.dream.base.brower.support;
+package org.dream.base.core.support;
 
 import lombok.*;
 
@@ -12,7 +12,6 @@ import lombok.*;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class SimpleResponse {
 

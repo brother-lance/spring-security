@@ -2,8 +2,8 @@ package org.dream.base.brower;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.dream.base.brower.support.SimpleResponse;
-import org.dream.base.brower.support.SocialUserInfo;
+import org.dream.base.core.support.DefaultSocialUserInfo;
+import org.dream.base.core.support.SimpleResponse;
 import org.dream.base.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,6 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import org.springframework.social.security.SocialUserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,7 +22,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.Provider;
 
 /**
  * 项目名称：security
@@ -82,8 +80,8 @@ public class BrowserSecurityAPI {
      * @param request 请求对象
      */
     @GetMapping("/authentication/require")
-    public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
-        SocialUserInfo userInfo = new SocialUserInfo();
+    public DefaultSocialUserInfo getSocialUserInfo(HttpServletRequest request) {
+        DefaultSocialUserInfo userInfo = new DefaultSocialUserInfo();
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
         userInfo.setHeadimg(connection.getImageUrl());
         userInfo.setNickname(connection.getDisplayName());

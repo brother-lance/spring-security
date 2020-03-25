@@ -3,12 +3,13 @@ package org.dream.base.brower.config;
 import org.dream.base.brower.session.DefaultExpiredSessionStrategy;
 import org.dream.base.brower.session.DefaultInvalidSessionStrategy;
 import org.dream.base.core.properties.SecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+
+import javax.annotation.Resource;
 
 /**
  * 项目名称：security
@@ -20,7 +21,7 @@ import org.springframework.security.web.session.SessionInformationExpiredStrateg
 @Configuration
 public class BrowserSecurityBeanConfig {
 
-    @Autowired
+    @Resource
     private SecurityProperties securityProperties;
 
     @Bean

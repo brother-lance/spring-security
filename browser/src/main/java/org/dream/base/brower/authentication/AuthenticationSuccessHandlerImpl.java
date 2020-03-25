@@ -23,7 +23,6 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
-//public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler
 public class AuthenticationSuccessHandlerImpl extends SimpleUrlAuthenticationSuccessHandler {
 
     @Autowired

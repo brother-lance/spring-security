@@ -206,13 +206,14 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
         addUrl(ValidateCodeType.IMAGE, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, securityProperties.getCode().getImage().getUrl());
 
-        addUrl(ValidateCodeType.IMAGE, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, securityProperties.getCode().getSms().getUrl());
+        addUrl(ValidateCodeType.SMS, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, securityProperties.getCode().getSms().getUrl());
     }
 
     // 解析需要拦截的URL
     private void addUrl(ValidateCodeType validateCodeType, String loginUrl, String filterUrl) {
-        urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
-        addToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
+        urlMap.put(loginUrl, validateCodeType);
+        addToMap(filterUrl, validateCodeType);
+
     }
 
     // 将URL转换单个URL 添加需要验证的MAP中

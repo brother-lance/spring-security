@@ -1,4 +1,4 @@
-package org.dream.base.brower.support;
+package org.dream.base.core.support;
 
 import lombok.Getter;
 import lombok.Setter;

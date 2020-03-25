@@ -5,19 +5,18 @@ import org.dream.base.core.properties.SecurityConstants;
 import org.dream.base.core.properties.SecurityProperties;
 import org.dream.base.core.validate.code.config.AbstractChannelSecurityConfig;
 import org.dream.base.core.validate.code.ValidateCodeSecurityConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -28,31 +27,32 @@ import javax.sql.DataSource;
  * 创 建 人：Lance.WU
  */
 @Configuration
+@EnableWebSecurity
 public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
 
-    @Autowired
+    @Resource
     private DataSource dataSource;
 
-    @Autowired
+    @Resource
     private SecurityProperties securityProperties;
 
-    @Autowired
+    @Resource
     private UserDetailsService userDetailsService;
 
-    @Autowired
+    @Resource
     ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
-    @Autowired
+    @Resource
     SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
-    @Autowired
+    @Resource
     SpringSocialConfigurer springSocialConfigurer;
 
-    @Autowired
+    @Resource
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 
-    @Autowired
+    @Resource
     private InvalidSessionStrategy invalidSessionStrategy;
 
     /**
@@ -88,6 +88,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .antMatchers(
                         SecurityConstants.DEFAULT_UN_AUTHENTICATION_URL,
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
+                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM,
                         securityProperties.getBrowser().getLoginPage(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                         securityProperties.getBrowser().getSignUpUrl(),
@@ -102,15 +103,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     }
 
 
-    /**
-     * 配置密码加密逻辑
-     *
-     * @return 加密对像
-     */
-    @Bean
-    public PasswordEncoder configurePassEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 
     /**
      * 生成记录的Token的数据库对像

@@ -12,9 +12,13 @@
     <artifactId>demo</artifactId>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>${project.groupId}</groupId>-->
+<!--            <artifactId>browser</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>browser</artifactId>
+            <artifactId>app</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

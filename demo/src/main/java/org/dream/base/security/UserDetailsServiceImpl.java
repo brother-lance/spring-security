@@ -51,6 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
 
     private SocialUserDetails buildUser(String userId) {
 
+
         // TODO 此处需要用户自己实现 查询用户信息的内容
         String encode = passwordEncoder.encode("123456");
         /**
@@ -62,6 +63,6 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
         /** 实际业务逻辑，应该是直接从数据库中读取数据 */
         return new SocialUser(userId, encode,
                 true, true, true, true,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
     }
 }

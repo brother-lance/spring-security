@@ -2,7 +2,7 @@ package org.dream.base.brower.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.dream.base.brower.support.SimpleResponse;
+import org.dream.base.core.support.SimpleResponse;
 import org.dream.base.core.validate.code.LoginType;
 import org.dream.base.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,6 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
-//public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHandler  // 默认配置 使用JSON
 public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFailureHandler {  // 可以使用重定向返回
 
     @Autowired

@@ -18,7 +18,7 @@ Thumbs.db
 *.tar.gz
 .idea
 
-app/src/
+app/src/test/
 browser/src/test/
 core/src/main/resources/
 core/src/test/

@@ -204,9 +204,9 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
 
-        addUrl(ValidateCodeType.IMAGE, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, securityProperties.getCode().getImage().getUrl());
+        addUrl(ValidateCodeType.image, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, securityProperties.getCode().getImage().getUrl());
 
-        addUrl(ValidateCodeType.SMS, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, securityProperties.getCode().getSms().getUrl());
+        addUrl(ValidateCodeType.sms, SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, securityProperties.getCode().getSms().getUrl());
     }
 
     // 解析需要拦截的URL

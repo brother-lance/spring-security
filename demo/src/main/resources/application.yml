@@ -1,9 +1,9 @@
 # 配置启动服务端口的密码
 server:
-  port: 80
+  port: 8080
   session:
     # 十分钟
-    timeout: 600
+    timeout: 1800
 
 #  port: 8060
 

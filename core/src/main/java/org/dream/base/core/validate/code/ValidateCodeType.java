@@ -16,8 +16,7 @@ import lombok.ToString;
 @ToString
 public enum ValidateCodeType {
 
-    SMS("sms"), // 短信
-    IMAGE("image"), // 图片
+    sms, // 短信
+    image, // 图片
     ;
-    private String code;
 }

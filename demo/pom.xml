@@ -12,14 +12,14 @@
     <artifactId>demo</artifactId>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>${project.groupId}</groupId>-->
-<!--            <artifactId>browser</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>app</artifactId>
+            <artifactId>browser</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>${project.groupId}</groupId>-->
+<!--            <artifactId>app</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>

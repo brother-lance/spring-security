@@ -25,7 +25,7 @@ public class ValidateCodeProcessorHolder {
     Map<String, ValidateCodeProcessor> validateCodeProcessors;
 
     public ValidateCodeProcessor findValidateCodeProcessor(ValidateCodeType validateCodeType) {
-        return validateCodeProcessors.get(validateCodeType.getCode() + SecurityConstants.VALIDATE_CODE_PROCESSOR_SUFFIX);
+        return validateCodeProcessors.get(validateCodeType + SecurityConstants.VALIDATE_CODE_PROCESSOR_SUFFIX);
     }
 
 }

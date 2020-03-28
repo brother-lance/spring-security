@@ -1,4 +1,4 @@
-package org.dream.base.core.validate.code.impl;
+package org.dream.base.core.validate.code.abstracts;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +11,6 @@ import org.dream.base.core.validate.code.ValidateCodeProcessor;
 import org.dream.base.core.validate.code.ValidateCodeType;
 import org.dream.base.core.validate.code.exception.ValidateCodeException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.web.HttpSessionSessionStrategy;
-import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -32,15 +30,13 @@ import java.util.Map;
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
 
     /**
-     * 操作Session的工具类
-     */
-    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
-
-    /**
      * 收集系统中所有的 {@link ValidateCodeGenerator} 的接口实现
      */
     @Autowired
     private Map<String, ValidateCodeGenerator> validateCodeGenerators;
+
+    @Autowired
+    AbstractValidateCodeRepository abstractValidateCodeRepository;
 
     /**
      * @see org.dream.base.core.validate.code.ValidateCodeProcessor#create(ServletWebRequest request)
@@ -49,7 +45,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     public void create(ServletWebRequest request) throws Exception {
 
         C validateCode = Generator(request);
-        save(request, validateCode);
+        abstractValidateCodeRepository.save(request, getProcessorType(request), validateCode);
         send(request, validateCode);
     }
 
@@ -62,8 +58,8 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @SuppressWarnings("unchecked")
     public C Generator(ServletWebRequest request) {
 
-        String type = getProcessorType(request);
-        ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(type + SecurityConstants.VALIDATE_CODE_GENERATOR_SUFFIX);
+        ValidateCodeType type = getProcessorType(request);
+        ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(type.toString() + SecurityConstants.VALIDATE_CODE_GENERATOR_SUFFIX);
         return (C) validateCodeGenerator.generate(request);
     }
 
@@ -74,18 +70,8 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      *
      * @param request 请求对像
      */
-    public String getProcessorType(ServletWebRequest request) {
-
-        return StringUtils.substringAfter(request.getRequest().getRequestURI(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX);
-    }
-
-    /**
-     * @param request      请求对像
-     * @param validateCode 保存验证码
-     */
-    public void save(ServletWebRequest request, C validateCode) {
-        ValidateCode c = new ValidateCode(validateCode.getCode(),validateCode.getExpireTime());
-        sessionStrategy.setAttribute(request, SecurityConstants.DEFAULT_VALIDATE_SESSION_PREFIX + getProcessorType(request).toUpperCase(), c);
+    public ValidateCodeType getProcessorType(ServletWebRequest request) {
+        return ValidateCodeType.valueOf(StringUtils.substringAfter(request.getRequest().getRequestURI(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX).toLowerCase());
     }
 
     /**
@@ -98,7 +84,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
         String key = SecurityConstants.DEFAULT_VALIDATE_SESSION_PREFIX + validateCodeType.name().toUpperCase();
 
         // 得到验证码对象
-        ValidateCode validateCodeSession = (ValidateCode) sessionStrategy.getAttribute(request, key);
+        ValidateCode validateCodeSession = abstractValidateCodeRepository.get(request, validateCodeType, key);
 
         String validateCode = ServletRequestUtils.getStringParameter(request.getRequest(), codeInputNameKey);
 
@@ -109,14 +95,14 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
             throw new ValidateCodeException("验证码不存在");
 
         if (validateCodeSession.isExpired()) {
-            sessionStrategy.removeAttribute(request, key);
+            abstractValidateCodeRepository.remove(request, validateCodeType, key);
             throw new ValidateCodeException("验证码已过期");
         }
 
         if (!StringUtils.endsWithIgnoreCase(validateCode, validateCodeSession.getCode())) {
             throw new ValidateCodeException("验证不匹配");
         }
-        sessionStrategy.removeAttribute(request, key);
+        abstractValidateCodeRepository.remove(request, validateCodeType, key);
     }
 
     /**

@@ -20,10 +20,12 @@ public class ValidateCodeSecurityConfig extends SecurityConfigurerAdapter<Defaul
     @Autowired
     ValidateCodeFilter validateCodeFilter;
 
+
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        http.addFilterAfter(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 }

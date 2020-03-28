@@ -15,7 +15,7 @@ public abstract class AbstractValidateCodeRepository<C extends ValidateCode> {
 
     protected abstract void save(ServletWebRequest request, ValidateCodeType type, C validateCode);
 
-    protected abstract void remove(ServletWebRequest request, ValidateCodeType type, String key);
+    protected abstract void remove(ServletWebRequest request, ValidateCodeType type);
 
-    protected abstract C get(ServletWebRequest request, ValidateCodeType type, String key);
+    protected abstract C get(ServletWebRequest request, ValidateCodeType type);
 }

@@ -3,6 +3,7 @@ package org.dream.base.core.validate.code;
 import lombok.Getter;
 import lombok.Setter;
 
+import lombok.ToString;
 import org.dream.base.core.properties.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,13 +20,14 @@ import java.util.Map;
 @Getter
 @Setter
 @Component
+@ToString
 public class ValidateCodeProcessorHolder {
 
     @Autowired
     Map<String, ValidateCodeProcessor> validateCodeProcessors;
 
     public ValidateCodeProcessor findValidateCodeProcessor(ValidateCodeType validateCodeType) {
-        return validateCodeProcessors.get(validateCodeType + SecurityConstants.VALIDATE_CODE_PROCESSOR_SUFFIX);
+        return validateCodeProcessors.get(validateCodeType.name() + SecurityConstants.VALIDATE_CODE_PROCESSOR_SUFFIX);
     }
 
 }

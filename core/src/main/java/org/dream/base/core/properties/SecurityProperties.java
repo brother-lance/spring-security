@@ -22,4 +22,7 @@ public class SecurityProperties {
 
     SocialProperties social = new SocialProperties();
 
+    AppProperties app = new AppProperties();
+
+
 }

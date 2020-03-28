@@ -3,6 +3,7 @@ package org.dream.base.brower.config;
 import org.dream.base.brower.session.DefaultExpiredSessionStrategy;
 import org.dream.base.brower.session.DefaultInvalidSessionStrategy;
 import org.dream.base.core.properties.SecurityProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
 @Configuration
 public class BrowserSecurityBeanConfig {
 
-    @Resource
+    @Autowired
     private SecurityProperties securityProperties;
 
     @Bean

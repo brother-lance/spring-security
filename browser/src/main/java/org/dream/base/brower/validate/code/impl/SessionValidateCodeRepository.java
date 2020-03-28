@@ -29,22 +29,21 @@ public class SessionValidateCodeRepository extends AbstractValidateCodeRepositor
     @Override
     protected void save(ServletWebRequest request, ValidateCodeType type, ValidateCode validateCode) {
         ValidateCode c = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
-        sessionStrategy.setAttribute(request, type, c);
-    }
-
-
-    @Override
-    protected void send(ServletWebRequest request, ValidateCodeType type, ValidateCode validateCode) {
-
+        sessionStrategy.setAttribute(request, getSessionKey(type), c);
     }
 
     @Override
-    protected void remove(ServletWebRequest request, ValidateCodeType type, String key) {
+    protected void remove(ServletWebRequest request, ValidateCodeType type) {
+        sessionStrategy.removeAttribute(request, getSessionKey(type));
 
     }
 
     @Override
-    protected ValidateCode get(ServletWebRequest request, ValidateCodeType type, String key) {
-        return null;
+    protected ValidateCode get(ServletWebRequest request, ValidateCodeType type) {
+        return (ValidateCode) sessionStrategy.getAttribute(request, getSessionKey(type));
+    }
+
+    private String getSessionKey(ValidateCodeType type) {
+        return SecurityConstants.DEFAULT_VALIDATE_SESSION_PREFIX + type.name().toUpperCase();
     }
 }

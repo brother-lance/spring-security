@@ -2,6 +2,7 @@ package org.dream.base.core.validate.code.sms;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang.StringUtils;
 import org.dream.base.core.authentication.mobile.SmsCodeSender;
 import org.dream.base.core.properties.SecurityProperties;
 import org.dream.base.core.validate.code.abstracts.AbstractValidateCodeProcessor;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
+
+import javax.naming.AuthenticationException;
 
 /**
  * 项目名称：security

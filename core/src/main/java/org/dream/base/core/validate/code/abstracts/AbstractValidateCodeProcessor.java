@@ -59,7 +59,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     public C Generator(ServletWebRequest request) {
 
         ValidateCodeType type = getProcessorType(request);
-        ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(type.toString() + SecurityConstants.VALIDATE_CODE_GENERATOR_SUFFIX);
+        ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(type.name() + SecurityConstants.VALIDATE_CODE_GENERATOR_SUFFIX);
         return (C) validateCodeGenerator.generate(request);
     }
 
@@ -81,10 +81,8 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      */
     public void validate(ServletWebRequest request, ValidateCodeType validateCodeType, String codeInputNameKey) throws ServletRequestBindingException {
 
-        String key = SecurityConstants.DEFAULT_VALIDATE_SESSION_PREFIX + validateCodeType.name().toUpperCase();
-
         // 得到验证码对象
-        ValidateCode validateCodeSession = abstractValidateCodeRepository.get(request, validateCodeType, key);
+        ValidateCode validateCodeSession = abstractValidateCodeRepository.get(request, validateCodeType);
 
         String validateCode = ServletRequestUtils.getStringParameter(request.getRequest(), codeInputNameKey);
 
@@ -95,14 +93,14 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
             throw new ValidateCodeException("验证码不存在");
 
         if (validateCodeSession.isExpired()) {
-            abstractValidateCodeRepository.remove(request, validateCodeType, key);
+            abstractValidateCodeRepository.remove(request, validateCodeType);
             throw new ValidateCodeException("验证码已过期");
         }
 
         if (!StringUtils.endsWithIgnoreCase(validateCode, validateCodeSession.getCode())) {
             throw new ValidateCodeException("验证不匹配");
         }
-        abstractValidateCodeRepository.remove(request, validateCodeType, key);
+        abstractValidateCodeRepository.remove(request, validateCodeType);
     }
 
     /**

@@ -2,6 +2,7 @@ package org.dream.base.web.controller;
 
 import org.dream.base.exception.UserNotExistsException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,4 +31,5 @@ public class ControllerExceptionHandler {
         error.put("message", ex.getMessage());
         return error;
     }
+
 }

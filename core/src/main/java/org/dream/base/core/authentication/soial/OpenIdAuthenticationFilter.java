@@ -1,6 +1,7 @@
-package org.dream.base.app.authentication.socil.openid;
+package org.dream.base.core.authentication.soial;
 
 import org.apache.commons.lang.StringUtils;
+import org.dream.base.core.authentication.soial.OpenIdAuthenticationToken;
 import org.dream.base.core.properties.SecurityConstants;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;

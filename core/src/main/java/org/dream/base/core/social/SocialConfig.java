@@ -34,7 +34,10 @@ public class SocialConfig extends SocialConfigurerAdapter {
     private SecurityProperties securityProperties;
 
     @Autowired(required = false)
-    ConnectionSignUp connectionSignUp;
+    private ConnectionSignUp connectionSignUp;
+
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcess socialAuthenticationFilterPostProcess;
 
     /**
      * 配置认证信息存储至数据
@@ -61,6 +64,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
         // 创建配置信息，设置需要拦截到登录的信息
         DefaultSpringSocialConfigurer defaultSpringSocialConfigurer = new DefaultSpringSocialConfigurer(securityProperties.getSocial().getFilterProcessorUrl());
         defaultSpringSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        defaultSpringSocialConfigurer.setSocialAuthenticationFilterPostProcess(socialAuthenticationFilterPostProcess);
         return defaultSpringSocialConfigurer;
     }
 

@@ -1,4 +1,4 @@
-package org.dream.base.app.authentication.socil.openid;
+package org.dream.base.core.authentication.soial;
 
 import lombok.Getter;
 import lombok.Setter;

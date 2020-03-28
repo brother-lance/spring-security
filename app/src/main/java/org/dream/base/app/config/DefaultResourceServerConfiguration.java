@@ -1,7 +1,6 @@
 package org.dream.base.app.config;
 
-import org.dream.base.app.authentication.socil.openid.OpenIdAuthenticationSecurityConfig;
-import org.dream.base.app.authentication.socil.openid.OpenIdAuthenticationToken;
+import org.dream.base.core.authentication.soial.OpenIdAuthenticationSecurityConfig;
 import org.dream.base.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import org.dream.base.core.properties.SecurityConstants;
 import org.dream.base.core.properties.SecurityProperties;
@@ -9,7 +8,6 @@ import org.dream.base.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;

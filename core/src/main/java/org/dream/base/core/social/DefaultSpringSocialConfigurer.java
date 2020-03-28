@@ -1,5 +1,7 @@
 package org.dream.base.core.social;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
@@ -10,12 +12,16 @@ import org.springframework.social.security.SpringSocialConfigurer;
  * 创建时间：2020/3/22 21:47
  * 创 建 人：Lance.WU
  */
+@Getter
+@Setter
 public class DefaultSpringSocialConfigurer extends SpringSocialConfigurer {
 
     /**
      * 处理URL请求的址
      */
     private String filterProcessorUrl;
+
+    private SocialAuthenticationFilterPostProcess socialAuthenticationFilterPostProcess;
 
     public DefaultSpringSocialConfigurer(String filterProcessorUrl) {
         this.filterProcessorUrl = filterProcessorUrl;
@@ -32,6 +38,10 @@ public class DefaultSpringSocialConfigurer extends SpringSocialConfigurer {
         SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
         // 放到过滤器的URL
         filter.setFilterProcessesUrl(filterProcessorUrl);
+
+        if (socialAuthenticationFilterPostProcess != null)
+            socialAuthenticationFilterPostProcess.process(filter);
+
         return (T) filter;
     }
 }

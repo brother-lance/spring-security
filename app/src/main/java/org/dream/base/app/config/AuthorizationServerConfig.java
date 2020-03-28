@@ -1,5 +1,7 @@
 package org.dream.base.app.config;
 
+import org.dream.base.app.social.openid.OpenIdSocialAuthenticationFilterPostProcess;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 
@@ -12,8 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  */
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig  {
-
-
+public class AuthorizationServerConfig {
 
 }

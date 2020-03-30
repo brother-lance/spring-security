@@ -40,6 +40,10 @@ public final class SecurityConstants {
      */
     public static final String DEFAULT_LOGIN_UP_URL = "/default-signUp.html";
     /**
+     * 默认的注册页面
+     */
+    public static final String DEFAULT_APP_LOGIN_UP_URL = "/social/signUp";
+    /**
      * 存储验证码存储Session的前缀
      */
     public static final String DEFAULT_VALIDATE_SESSION_PREFIX = "DEFAULT_VALIDATE_SESSION_PREFIX_";

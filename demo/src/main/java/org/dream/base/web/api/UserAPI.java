@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.dream.base.app.social.openid.AppSocialSignUpUtils;
 import org.dream.base.dto.User;
 import org.dream.base.dto.UserQueryCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +38,20 @@ public class UserAPI {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    @Autowired
+    private AppSocialSignUpUtils appSocialSignUpUtils;
+
     /**
      * 创建用户信息
-     * @param  user 用户对像
+     *
+     * @param user 用户对像
      */
     @PostMapping("register")
     public void register(User user, HttpServletRequest request) {
-            // TODO 写注册用户逻辑 获取用户的基本信息
+        // TODO 写注册用户逻辑 获取用户的基本信息
         String userId = user.getUserName(); // 此处应该是获取唯一编号
-        providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
+        //providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
+        appSocialSignUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
 
     }
 

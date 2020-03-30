@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * 创 建 人：Lance.WU
  */
 @Component
-public class SessionValidateCodeRepository extends AbstractValidateCodeRepository {
+public class RedisValidateCodeRepository extends AbstractValidateCodeRepository {
 
     /**
      * 操作Redis的工具类

@@ -69,7 +69,7 @@ public class DefaultResourceServerConfiguration extends ResourceServerConfigurer
                         securityProperties.getBrowser().getSignUpUrl(),
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html",
-                        "/user/regist")
+                        "/user/regist", "/social/signUp")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

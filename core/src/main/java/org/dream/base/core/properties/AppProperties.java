@@ -15,6 +15,8 @@ import lombok.Setter;
 @Setter
 public class AppProperties {
 
+    private String signUpUrl = SecurityConstants.DEFAULT_LOGIN_UP_URL;
+
     RedisProperties redis = new RedisProperties();
 
 }

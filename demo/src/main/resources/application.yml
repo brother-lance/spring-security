@@ -57,8 +57,10 @@ security:
 #      appSecret: 60f78681d063590a469f1b297feff3c4
   oauth2:
     client:
-      client-id: lancewu
-      client-secret: lancewuSecret
+      - clientId: lancewu
+        clientSecret: lancewuSecret
+      - clientId: test
+        clientSecret: testSecret
 #  browser:
 #    loginPage: "/demo-signIn.html"
 #  code:

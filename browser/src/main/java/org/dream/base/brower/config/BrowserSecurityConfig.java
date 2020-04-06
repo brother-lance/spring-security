@@ -1,6 +1,7 @@
 package org.dream.base.brower.config;
 
 import org.dream.base.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import org.dream.base.core.authorize.AuthorizeConfigManager;
 import org.dream.base.core.properties.SecurityConstants;
 import org.dream.base.core.properties.SecurityProperties;
 import org.dream.base.core.validate.code.config.AbstractChannelSecurityConfig;
@@ -56,6 +57,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     @Autowired
     private InvalidSessionStrategy invalidSessionStrategy;
 
+    @Autowired
+    AuthorizeConfigManager authorizeConfigManager;
+
     /**
      * 配置登录验证流程的逻辑信息
      *
@@ -85,22 +89,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .expiredSessionStrategy(sessionInformationExpiredStrategy)
                 .and()
                 .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UN_AUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html",
-                        "/user/regist")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
                 .csrf().disable();
+
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 
 

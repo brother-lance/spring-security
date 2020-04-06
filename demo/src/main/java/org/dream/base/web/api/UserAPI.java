@@ -1,25 +1,33 @@
 package org.dream.base.web.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.dream.base.app.social.openid.AppSocialSignUpUtils;
+import org.dream.base.core.properties.SecurityProperties;
 import org.dream.base.dto.User;
 import org.dream.base.dto.UserQueryCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +49,9 @@ public class UserAPI {
     @Autowired
     private AppSocialSignUpUtils appSocialSignUpUtils;
 
+    @Autowired
+    private SecurityProperties securityProperties;
+
     /**
      * 创建用户信息
      *
@@ -60,6 +71,26 @@ public class UserAPI {
      */
     @GetMapping("me")
     public Object me(@AuthenticationPrincipal UserDetails user) {
+
+        return user;
+    }
+
+    /**
+     * 解析jwt数据
+     */
+    @GetMapping("meJwt")
+    public Object me(Authentication user, HttpServletRequest request) throws Exception {
+
+        String header  = request.getHeader("Authorization");
+        String token = StringUtils.substringAfter(header,"bearer ");
+
+        Claims body = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
+                .parseClaimsJws(token).getBody();
+
+        Object signing = body.get("signing");
+
+        log.info("{}",signing);
+
         return user;
     }
 

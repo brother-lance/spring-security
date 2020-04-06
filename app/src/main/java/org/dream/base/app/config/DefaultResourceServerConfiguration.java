@@ -1,5 +1,6 @@
 package org.dream.base.app.config;
 
+import org.dream.base.core.authorize.AuthorizeConfigManager;
 import org.dream.base.core.authentication.soial.OpenIdAuthenticationSecurityConfig;
 import org.dream.base.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import org.dream.base.core.properties.SecurityConstants;
@@ -44,6 +45,9 @@ public class DefaultResourceServerConfiguration extends ResourceServerConfigurer
     @Resource
     SpringSocialConfigurer springSocialConfigurer;
 
+    @Autowired
+    AuthorizeConfigManager authorizeConfigManager;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
@@ -58,23 +62,11 @@ public class DefaultResourceServerConfiguration extends ResourceServerConfigurer
                 .and()
                 .apply(openIdAuthenticationSecurityConfig)
                 .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UN_AUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html",
-                        "/user/regist", "/social/signUp")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
+
                 .csrf().disable();
+
+        authorizeConfigManager.config(http.authorizeRequests());
+
     }
 
 

@@ -16,13 +16,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "security")
 public class SecurityProperties {
 
-    BrowserProperties browser = new BrowserProperties();
+    private BrowserProperties browser = new BrowserProperties();
 
-    ValidateCodeProperties code = new ValidateCodeProperties();
+    private ValidateCodeProperties code = new ValidateCodeProperties();
 
-    SocialProperties social = new SocialProperties();
+    private  SocialProperties social = new SocialProperties();
 
-    AppProperties app = new AppProperties();
+    private Oauth2Properties oauth2 = new Oauth2Properties();
+
+    private AppProperties app = new AppProperties();
 
 
 }
